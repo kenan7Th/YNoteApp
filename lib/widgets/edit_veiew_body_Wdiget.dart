@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:martenss/widgets/custom_app_barWidget.dart';
+import 'package:martenss/widgets/custom_text_fieldWidget.dart';
 
 class EditNoteVeiwBody extends StatelessWidget {
   const EditNoteVeiwBody({super.key});
@@ -15,9 +16,19 @@ class EditNoteVeiwBody extends StatelessWidget {
             height: 50,
           ),
           CustomAppBarWidget(
-            title: 'Edit Not',
+            title: 'Edite Note',
             myicon: Icons.check,
-          )
+          ),
+          CustomTextField(
+            hint: 'Title',
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          CustomTextField(
+            hint: 'Content',
+            mymaxLine: 5,
+          ),
         ],
       ),
     );
