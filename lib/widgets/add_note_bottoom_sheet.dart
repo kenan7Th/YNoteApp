@@ -1,78 +1,44 @@
 import 'package:flutter/material.dart';
-
-import 'package:martenss/widgets/custom_buttonWidget.dart';
-
-import 'package:martenss/widgets/custom_text_fieldWidget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:martenss/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:martenss/widgets/add_note_form.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
-  const AddNoteBottomSheet({super.key});
+  const AddNoteBottomSheet({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        height: 400,
-        child: SingleChildScrollView(child: AddNoteForm()),
-      ),
-    );
-  }
-}
-
-class AddNoteForm extends StatefulWidget {
-  AddNoteForm({super.key});
-
-  @override
-  State<AddNoteForm> createState() => _AddNoteFormState();
-}
-
-class _AddNoteFormState extends State<AddNoteForm> {
-  final GlobalKey<FormState> fromKey = GlobalKey();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, subtitle;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: fromKey,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            hint: 'title',
-            myonSaved: (value) {
-              title = value;
-            },
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            hint: 'Subtitle',
-            myonSaved: (value) {
-              subtitle = value;
-            },
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            hint: 'content',
-            mymaxLine: 5,
-          ),
-          SizedBox(height: 16),
-          CustomButton(
-            myonTap: () {
-              if (fromKey.currentState!.validate()) {
-                fromKey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-              }
-            },
-          ),
-          SizedBox(height: 16),
-        ],
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: BlocConsumer<AddNoteCubit, AddNoteState>(
+        listener: (context, state) {
+          if (state is AddNoteSuccess) {
+            //fetch all notes after add note
+            //BlocProvider.of<AllNotesCubit>(context).fetchAllNotes();
+            Navigator.pop(context);
+          } else if (state is AddNoteFailure) {
+            debugPrint("failed cause ${state.errMessage}");
+          }
+        },
+        builder: (context, state) {
+          //padding when keyboard show
+          var keyBoardIsShow = MediaQuery.of(context).viewInsets.bottom;
+          return AbsorbPointer(
+            absorbing: state is AddNoteLoading ? true : false,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 16,
+                right: 16,
+                bottom: keyBoardIsShow,
+              ),
+              child: const SingleChildScrollView(
+                child: AddNoteForm(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
