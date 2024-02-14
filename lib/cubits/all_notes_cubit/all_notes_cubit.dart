@@ -17,7 +17,7 @@ class AllNotesCubit extends Cubit<AllNotesState> {
     Box<NoteModel> noteBox = Hive.box<NoteModel>(kNotesBox);
     notesList = noteBox.values.toList();
     filteredNoteList = noteBox.values.toList();
-    emit(AllNotesSuccess());
+    emit(AllNotesSuccess(notesList!));
   }
 
   //search by title and get all notes have that title
