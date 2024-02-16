@@ -42,7 +42,7 @@ class _NoteViewBodyState extends State<NoteViewBody> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const SearchNote();
+                    return const SearchNote(); //
                   },
                 ),
               );
