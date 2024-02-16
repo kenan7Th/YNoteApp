@@ -20,16 +20,16 @@ class CustomTextField extends StatelessWidget {
           return null;
         }
       },
-      cursorColor: KprimaryColor,
+      cursorColor: kPrimaryColor,
       maxLines: mymaxLine,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(
-          color: KprimaryColor,
+          color: kPrimaryColor,
         ),
         border: buildBorder(),
         enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(KprimaryColor),
+        focusedBorder: buildBorder(kPrimaryColor),
       ),
     );
   }

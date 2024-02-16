@@ -57,13 +57,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
 
                   var currentDate = DateTime.now();
                   var formattedCurrentDate =
-                      DateFormat.yMEd().format(currentDate);
+                      DateFormat.yMEd('dd-mm-yyyy').format(currentDate);
                   var noteModel = NoteModel(
                       title: title!,
-                      subTitle: subtitle!,
-                      date: formattedCurrentDate,
+                      content: subtitle!,
+                      dateTime: formattedCurrentDate,
                       color: Colors.blue.value);
-                  BlocProvider.of<AddNoteCubit>(context).AddNote(noteModel);
+                  BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }

@@ -1,0 +1,128 @@
+test
+test noice
+
+appBar: AppBar(
+        title: Text("Notes"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
+
+       floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+
+
+
+      Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "title",
+                style: TextStyle(
+                  fontSize: 52,
+                  color: Colors.black,
+                ),
+              ),
+              CustomDeleteIconButton(),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          DescrationOfNote(),
+          SizedBox(
+            height: 50,
+          ),
+          DateOfNote(),
+
+void initState(){
+  BlocProvider.of<AllNotesCubit>(context).fetchAllNotes();
+  super.initState();}
+
+
+
+Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ColorItem(
+                color: kColorListOfNotes[0],
+                onTap: () {
+                  choosedColor = kColorListOfNotes[0];
+                },
+              ),
+              ColorItem(
+                  color: kColorListOfNotes[1],
+                  onTap: () {
+                    choosedColor = kColorListOfNotes[1];
+                  }),
+              ColorItem(
+                  color: kColorListOfNotes[2],
+                  onTap: () {
+                    choosedColor = kColorListOfNotes[2];
+                  }),
+              ColorItem(
+                  color: kColorListOfNotes[3],
+                  onTap: () {
+                    choosedColor = kColorListOfNotes[3];
+                  }),
+              ColorItem(
+                  color: kColorListOfNotes[4],
+                  onTap: () {
+                    choosedColor = kColorListOfNotes[4];
+                  }),
+              ColorItem(
+                  color: kColorListOfNotes[5],
+                  onTap: () {
+                    choosedColor = kColorListOfNotes[5];
+                  }),
+            ],
+          )
+
+          class ColorListSelection extends StatelessWidget {
+  ColorListSelection({super.key, required this.choosedColor});
+  int choosedColor;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        ColorItem(
+          color: kColorListOfNotes[0],
+          onTap: () {
+            choosedColor = kColorListOfNotes[0];
+          },
+        ),
+        ColorItem(
+            color: kColorListOfNotes[1],
+            onTap: () {
+              choosedColor = kColorListOfNotes[1];
+            }),
+        ColorItem(
+            color: kColorListOfNotes[2],
+            onTap: () {
+              choosedColor = kColorListOfNotes[2];
+            }),
+        ColorItem(
+            color: kColorListOfNotes[3],
+            onTap: () {
+              choosedColor = kColorListOfNotes[3];
+            }),
+        ColorItem(
+            color: kColorListOfNotes[4],
+            onTap: () {
+              choosedColor = kColorListOfNotes[4];
+            }),
+        ColorItem(
+            color: kColorListOfNotes[5],
+            onTap: () {
+              choosedColor = kColorListOfNotes[5];
+            }),
+      ],
+    );
+  }
+}
